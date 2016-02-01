@@ -15,6 +15,8 @@ setup(
     license='GPLv2',
     classifiers=[
         "Development Status :: 4 - Beta",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
@@ -27,5 +29,5 @@ setup(
     packages=find_packages(exclude=['docs', 'tests']),
     include_package_data=True,
     zip_safe=False,
-    install_requires=['sqlalchemy'],
+    install_requires=['sqlalchemy', 'zope.sqlalchemy', 'celery'],
 )
