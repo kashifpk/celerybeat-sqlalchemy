@@ -7,6 +7,8 @@ from os.path import abspath
 from sqlabeat.db import get_db_engine, create_tables, get_db_session
 from sqlabeat.schedulers import SQLAlchemyScheduler
 from celery import Celery
+from celery.beat import ScheduleEntry
+from celery.schedules import schedule
 
 app = Celery('basic', broker='amqp://guest@localhost//')
 
@@ -18,6 +20,9 @@ SQLALCHEMY_URL = 'sqlite:///' + db_path
 
 class MyScheduler(SQLAlchemyScheduler):
     sqlalchemy_db_url = SQLALCHEMY_URL
+    _schedule = {
+        'task1': ScheduleEntry(name="task1", task="basic.task1", schedule=schedule(run_every=10, app=app))
+    }
 
 
 @app.task
